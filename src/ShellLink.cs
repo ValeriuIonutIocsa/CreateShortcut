@@ -1,5 +1,5 @@
-namespace CreateShortcut {
-
+namespace CreateShortcut
+{
     using System;
     using System.Runtime.InteropServices;
     using System.Runtime.InteropServices.ComTypes;
@@ -12,22 +12,43 @@ namespace CreateShortcut {
     [CoClass(typeof(CShellLinkW))]
     interface IShellLinkW
     {
-        void GetPath([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile, int cchMaxPath, out IntPtr pfd, uint fFlags);
+        void GetPath(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile,
+            int cchMaxPath,
+            out IntPtr pfd,
+            uint fFlags
+        );
         IntPtr GetIDList();
         void SetIDList(IntPtr pidl);
-        void GetDescription([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile, int cchMaxName);
+        void GetDescription(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszFile,
+            int cchMaxName
+        );
         void SetDescription([MarshalAs(UnmanagedType.LPWStr)] string pszName);
-        void GetWorkingDirectory([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszDir, int cchMaxPath);
+        void GetWorkingDirectory(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszDir,
+            int cchMaxPath
+        );
         void SetWorkingDirectory([MarshalAs(UnmanagedType.LPWStr)] string pszDir);
-        void GetArguments([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszArgs, int cchMaxPath);
+        void GetArguments(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszArgs,
+            int cchMaxPath
+        );
         void SetArguments([MarshalAs(UnmanagedType.LPWStr)] string pszArgs);
         ushort GetHotKey();
         void SetHotKey(ushort wHotKey);
         uint GetShowCmd();
         void SetShowCmd(uint iShowCmd);
-        void GetIconLocation([Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath, int cchIconPath, out int piIcon);
+        void GetIconLocation(
+            [Out, MarshalAs(UnmanagedType.LPWStr)] StringBuilder pszIconPath,
+            int cchIconPath,
+            out int piIcon
+        );
         void SetIconLocation([MarshalAs(UnmanagedType.LPWStr)] string pszIconPath, int iIcon);
-        void SetRelativePath([MarshalAs(UnmanagedType.LPWStr)] string pszPathRel, [Optional] uint dwReserved);
+        void SetRelativePath(
+            [MarshalAs(UnmanagedType.LPWStr)] string pszPathRel,
+            [Optional] uint dwReserved
+        );
         void Resolve(IntPtr hwnd, uint fFlags);
         void SetPath([MarshalAs(UnmanagedType.LPWStr)] string pszFile);
     }
@@ -43,7 +64,8 @@ namespace CreateShortcut {
             string lnkPath,
             string targetPath,
             string description,
-            string workingDirectory)
+            string workingDirectory
+        )
         {
             if (string.IsNullOrWhiteSpace(lnkPath))
                 throw new ArgumentNullException("lnkPath");
