@@ -17,9 +17,8 @@
             if (args.Length < 2)
             {
                 string helpMessage = CreateHelpMessage();
-                Console.Error.WriteLine(
-                    "insufficient arguments" + Environment.NewLine + helpMessage
-                );
+                Console.Error.WriteLine("ERROR - insufficient arguments" +
+                    Environment.NewLine + helpMessage);
                 Environment.Exit(1);
             }
 
@@ -39,7 +38,17 @@
             string workingDirPathString;
             if (args.Length < 4)
             {
-                workingDirPathString = Path.GetDirectoryName(targetPathString);
+                string? tmpWorkingDirPathString = Path.GetDirectoryName(targetPathString);
+                if (tmpWorkingDirPathString == null)
+                {
+                    workingDirPathString = "";
+                    Console.Error.WriteLine("ERROR - invalid working dir path");
+                    Environment.Exit(2);
+                }
+                else
+                {
+                    workingDirPathString = tmpWorkingDirPathString;
+                }
             }
             else
             {

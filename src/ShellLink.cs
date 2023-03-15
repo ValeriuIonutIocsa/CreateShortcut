@@ -87,15 +87,21 @@ namespace CreateShortcut
                 link.SetWorkingDirectory(workingDirectory);
             }
 
-            string lnkParentDirectory = Path.GetDirectoryName(lnkPath);
-            if (!Directory.Exists(lnkParentDirectory))
+            string? lnkParentDirectory = Path.GetDirectoryName(lnkPath);
+            if (lnkParentDirectory == null)
             {
-                Directory.CreateDirectory(lnkParentDirectory);
+                Console.Error.WriteLine("ERROR - failed to compute the shortcut folder path");
             }
+            else
+            {
+                if (lnkParentDirectory != null && !Directory.Exists(lnkParentDirectory))
+                {
+                    Directory.CreateDirectory(lnkParentDirectory);
+                }
 
-            IPersistFile file = (IPersistFile)link;
-            file.Save(lnkPath, true);
-
+                IPersistFile file = (IPersistFile)link;
+                file.Save(lnkPath, true);
+            }
             Marshal.FinalReleaseComObject(link);
         }
     }
