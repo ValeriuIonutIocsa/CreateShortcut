@@ -41,9 +41,7 @@
                 string? tmpWorkingDirPathString = Path.GetDirectoryName(targetPathString);
                 if (tmpWorkingDirPathString == null)
                 {
-                    workingDirPathString = "";
-                    Console.Error.WriteLine("ERROR - invalid working dir path");
-                    Environment.Exit(2);
+                    workingDirPathString = targetPathString;
                 }
                 else
                 {
