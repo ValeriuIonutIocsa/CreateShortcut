@@ -1,4 +1,4 @@
-namespace CreateShortcut
+namespace CreateShortcut.src
 {
     using System;
     using System.Runtime.InteropServices;
