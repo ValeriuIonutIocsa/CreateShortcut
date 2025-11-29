@@ -1,11 +1,9 @@
 ﻿namespace CreateShortcut.src
 {
-    using System;
-    using System.IO;
-
     class AppStartCreateShortcut
     {
-        static void Main(string[] args)
+        static void Main(
+            string[] args)
         {
             if (args.Length >= 1 && "-help".Equals(args[0]))
             {
@@ -14,7 +12,7 @@
                 Environment.Exit(0);
             }
 
-            if (args.Length < 2)
+            if (args.Length < 3)
             {
                 string helpMessage = CreateHelpMessage();
                 Console.Error.WriteLine("ERROR - insufficient arguments" +
@@ -23,16 +21,21 @@
             }
 
             string targetPathString = Path.GetFullPath(args[0]);
+            if (!File.Exists(targetPathString))
+            {
+                Console.Error.WriteLine("ERROR - target path does not exist: "
+                    + targetPathString);
+                Environment.Exit(1);
+            }
+
             string shortcutName = args[1];
 
-            string shortcutDirPathString;
-            if (args.Length < 3)
+            string shortcutDirPathString = Path.GetFullPath(args[2]);
+            if (!Directory.Exists(shortcutDirPathString))
             {
-                shortcutDirPathString = @"D:\IVI_MISC\Shortcuts";
-            }
-            else
-            {
-                shortcutDirPathString = Path.GetFullPath(args[2]);
+                Console.Error.WriteLine("ERROR - shortcut directory does not exist: "
+                    + shortcutDirPathString);
+                Environment.Exit(1);
             }
 
             string workingDirPathString;
